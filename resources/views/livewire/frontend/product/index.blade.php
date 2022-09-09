@@ -5,8 +5,39 @@
             <div class="card">
                 <div class="card-header">
                     <div class="card-body">
-                        <label for="" class="dblock">Hello</label>
-                        
+                        <div class="form-group">
+                            <label for="brandname"><h4>Brands</h4></label>
+                            <div class="form-check">
+                                @if ($category->brands->count() > 0)
+                                    @foreach ($category->brands as $brand_item)
+                                    <label class="form-check-label d-block">
+                                        <input wire:model="brandInputs" id="brandname" type="checkbox" class="form-check-input" value="{{ $brand_item->name }}" style="width:20px; height:20px">
+                                            <h6 class="text-primary">{{ $brand_item->name }}</h6>    
+                                    </label>
+                                        
+                                    @endforeach
+                                @else
+                                    <h6 class="text-primary">No brands</h6>
+                                @endif
+                            </div>                    
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="brandname"><h4>Price</h4></label>
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                  <input wire:model="priceInput" type="radio" class="form-check-input" name="priceSort" id="optionsRadios1" value="high-to-low">
+                                    <h6 class="text-primary">High to Low</h6>    
+                                </label>
+                              </div>
+                              <div class="form-check">
+                                <label class="form-check-label">
+                                  <input wire:model="priceInput" type="radio" class="form-check-input" name="priceSort" id="optionsRadios2" value="low-to-high">
+                                    <h6 class="text-primary">Low to High</h6>    
+                                </label>
+                              </div>                 
+                        </div>
                     </div>
                 </div>
             </div>
@@ -15,7 +46,7 @@
             <div class="row">
                 @forelse ($products as $product_item)
             
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <div class="product-card">
                         <div class="product-card-img">
             
@@ -52,8 +83,15 @@
                 </div>
                 
                 @empty
-                <div class="col-md-3">
-                    <h4>No Product Found</h4>
+                <div class="col-md-4">
+                    <div class="product-card">
+                        <div class="product-card-img">
+                            <img src="{{ asset('uploads/notfound.jpg') }}" alt="">
+                        </div>
+                        <div class="product-card-body">
+                            <h5 class="product-name text-center">No Product Found</h5>
+                        </div>
+                    </div>
                 </div>
                 @endforelse
             </div>

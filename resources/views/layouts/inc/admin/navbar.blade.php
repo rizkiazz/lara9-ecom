@@ -129,6 +129,10 @@
               <i class="mdi mdi-settings text-primary"></i>
               Settings
             </a>
+            <a class="dropdown-item" href="{{ url('/') }}">
+              <i class="mdi mdi-home text-primary"></i>
+              Homepage
+            </a>
             <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                 document.getElementById('logout-form').submit();">
                 <i class="mdi mdi-logout text-primary"></i>{{ __('Logout') }}
