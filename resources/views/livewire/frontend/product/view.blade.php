@@ -1,5 +1,13 @@
 <div class="py-3 py-md-5">
     <div class="container">
+        <div>
+            @if (session()->has('message'))
+                <div class="alert alert-success">
+                    {{ session('message') }}
+                </div>
+            @endif
+        </div>
+    
         <div class="row">
             <div class="col-md-5 mt-3">
                 <div class="bg-white border">
@@ -49,14 +57,19 @@
                     </div>
                     <div class="mt-2">
                         <div class="input-group">
-                            <span class="btn btn1"><i class="fa fa-minus"></i></span>
-                            <input type="text" value="1" class="input-quantity" />
-                            <span class="btn btn1"><i class="fa fa-plus"></i></span>
+                            <span class="btn btn1" wire:click="decrementQuantity"><i class="fa fa-minus"></i></span>
+                            <input type="text" value="{{ $this->quantityCount }}" readonly wire:model="quantityCount" class="input-quantity" />
+                            <span class="btn btn1" wire:click="incrementQuantity"><i class="fa fa-plus"></i></span>
                         </div>
                     </div>
                     <div class="mt-2">
-                        <a href="" class="btn btn1"> <i class="fa fa-shopping-cart"></i> Add To Cart</a>
-                        <a href="" class="btn btn1"> <i class="fa fa-heart"></i> Add To Wishlist </a>
+                        <button wire:click="addToCart({{ $product->id }})" type="button" class="btn btn1"> <i class="fa fa-shopping-cart"></i> Add To Cart</button>
+                        <button wire:click="addToWishList({{ $product->id }})" type="button" class="btn btn1">
+                            <span wire:loading.remove wire:target="addToWishList">
+                                <i class="fa fa-shopping-cart"></i> Add To WhistList
+                            </span>
+                            <span wire:loading wire:target="addToWishList">Adding.....<i class="fa fa-spinner"></i></span>
+                        </button>
                     </div>
                     <div class="mt-3">
                         <h5 class="mb-0">Small Description</h5>
